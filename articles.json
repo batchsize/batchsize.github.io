@@ -5,7 +5,7 @@
     ],
     "Programming": [
         { "title": "glog", "file": "pages/glog.md" },
-    ]
+    ],
     "Reading": [
         { "title": "读书笔记", "file": "pages/读书笔记.md" }
     ]
