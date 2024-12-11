@@ -178,3 +178,13 @@ for branch in $(git branch -r | grep -v '\->'); do git checkout --track $branch;
 #### **3. 注意事项**
 - 使用 `git fetch` 会拉取所有远程分支的最新信息，但不会自动切换到这些分支。
 - 使用 `git checkout --track` 创建本地分支并跟踪远程分支。
+
+## **超大仓库分段克隆**
+```bash
+git clone --depth=1 <repo-url>  # 仅克隆最新的 commit
+```
+如果需要完整历史，后续可以逐步拉取：
+
+```bash
+git fetch --unshallow
+```
