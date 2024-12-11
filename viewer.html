@@ -3,31 +3,11 @@
 <head>
     <title>Markdown Viewer</title>
     <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        .back-home {
-            display: inline-block;
-            margin-bottom: 20px;
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .back-home:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
 <body>
     <h1 id="page-title">Markdown Viewer</h1>
-    <a href="index.html" class="back-home">&#8592; Back to Home</a>
+    <button onclick="window.location.href='index.html'">返回主页</button>
+    <hr>
     <div id="content"></div>
 
     <script>
@@ -36,9 +16,9 @@
         const file = params.get('file');
 
         if (file) {
-            // 设置页面标题
-            const fileName = file.split('/').pop().split('.')[0]; // 获取文件名作为标题
-            document.getElementById('page-title').textContent = fileName;
+            // 设置标题为文件名
+            const title = file.split('/').pop().replace('.md', '');
+            document.getElementById('page-title').textContent = title;
 
             // 加载指定的 Markdown 文件
             fetch(file)
