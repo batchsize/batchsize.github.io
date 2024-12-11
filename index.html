@@ -8,21 +8,8 @@
     <h1>Welcome to My Blog!</h1>
     <p>This is a sample blog hosted on GitHub Pages.</p>
     <ul>
-        <li><a href="pages/docker容器.md" onclick="loadMarkdown(event, 'pages/docker容器.md')">docker容器</a></li>
-        <li><a href="pages/git操作.md" onclick="loadMarkdown(event, 'pages/git操作.md')">git操作</a></li>
+        <li><a href="viewer.html?file=pages/docker容器.md">docker容器</a></li>
+        <li><a href="viewer.html?file=pages/git操作.md">git操作</a></li>
     </ul>
-    <div id="content"></div>
-
-    <script>
-        function loadMarkdown(event, file) {
-            event.preventDefault(); // Prevent default link behavior
-            fetch(file)
-                .then(response => response.text())
-                .then(text => {
-                    const converter = new showdown.Converter();
-                    document.getElementById('content').innerHTML = converter.makeHtml(text);
-                });
-        }
-    </script>
 </body>
 </html>

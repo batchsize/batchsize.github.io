@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Markdown Viewer</title>
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script>
+        // 获取查询参数中的文件路径
+        const params = new URLSearchParams(window.location.search);
+        const file = params.get('file');
+
+        if (file) {
+            // 加载指定的 Markdown 文件
+            fetch(file)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`File not found: ${file}`);
+                    }
+                    return response.text();
+                })
+                .then(text => {
+                    const converter = new showdown.Converter();
+                    document.getElementById('content').innerHTML = converter.makeHtml(text);
+                })
+                .catch(error => {
+                    document.getElementById('content').innerHTML = `<p>Error: ${error.message}</p>`;
+                });
+        } else {
+            document.getElementById('content').innerHTML = '<p>No file specified.</p>';
+        }
+    </script>
+</body>
+</html>
