@@ -1,17 +1,6 @@
-1. 拉取submodule
-  git submodule update --init --recursive
+## **1. Submodule**
 
-
-
-
-
-Git 中可以使用 **submodule（子模块）** 或 **subtree（子树）** 来管理和拉取子仓库或分支。下面分别介绍两种方式及其具体用法。
-
----
-
-## **1. 使用 Submodule 管理子仓库**
-
-Submodule 是 Git 的一种功能，可以将一个 Git 仓库嵌套为另一个仓库的子模块。
+Submodule是将一个 Git 仓库嵌套为另一个仓库的子模块。
 
 ### **添加 Submodule**
 
@@ -21,10 +10,6 @@ Submodule 是 Git 的一种功能，可以将一个 Git 仓库嵌套为另一个
    ```bash
    git submodule add <submodule_repository_url> path/to/subdirectory
    ```
-
-   - `submodule_repository_url` 是子仓库的地址。
-   - `path/to/subdirectory` 是子模块存放的路径。
-
 2. **初始化和更新子模块**
    当克隆主仓库时，初始化并拉取子模块内容：
 
@@ -33,8 +18,6 @@ Submodule 是 Git 的一种功能，可以将一个 Git 仓库嵌套为另一个
    ```
 
 3. **拉取子模块的更新**
-   如果子模块内容有更新：
-
    ```bash
    git submodule update --remote
    ```
@@ -67,9 +50,9 @@ Submodule 是 Git 的一种功能，可以将一个 Git 仓库嵌套为另一个
 
 ---
 
-## **2. 使用 Subtree 管理子仓库**
+## **2. Subtree**
 
-Subtree 是一种将子仓库直接嵌入到主仓库的一种方式，使用时不需要额外初始化和管理，适合更简单的场景。
+Subtree 将子仓库直接嵌入到主仓库，使用时不需要额外初始化和管理，适合更简单的场景。
 
 ### **添加 Subtree**
 
@@ -79,13 +62,9 @@ Subtree 是一种将子仓库直接嵌入到主仓库的一种方式，使用时
    ```bash
    git subtree add --prefix=path/to/subdirectory <submodule_repository_url> <branch>
    ```
-
-   - `path/to/subdirectory` 是拉取子仓库内容的路径。
-   - `<submodule_repository_url>` 是子仓库的地址。
    - `<branch>` 是子仓库的分支。
 
 2. **更新子仓库**
-   当子仓库有变更时，可以通过以下命令更新：
 
    ```bash
    git subtree pull --prefix=path/to/subdirectory <submodule_repository_url> <branch>
@@ -117,9 +96,9 @@ Subtree 是一种将子仓库直接嵌入到主仓库的一种方式，使用时
 2. 如果子模块内容稳定，主要用作工具或依赖库，**推荐使用 Subtree**。
 3. 如果需要临时拉取子仓库，可以使用 `git clone` 或 `git archive`。
 
+---
 
-
-
+## **3.git远程分支操作**
 要查看 Git 中的远程分支，可以使用以下命令：
 
 ### **1. 查看所有远程分支**
@@ -170,10 +149,9 @@ git log origin/branch_name
 
 
 
+### **5.将所有远程分支拉取到本地**
 
-要将所有远程分支拉取到本地，可以按照以下步骤操作：
-
-### **1. 拉取所有远程分支的引用**
+#### **1. 拉取所有远程分支的引用**
 
 首先，通过 `git fetch` 命令从远程仓库获取所有分支的引用。此命令不会自动切换到这些分支，而是将远程分支的更新保存在本地的远程跟踪分支中。
 
@@ -181,7 +159,7 @@ git log origin/branch_name
 git fetch --all
 ```
 
-### **2. 拉取所有远程分支并在本地创建跟踪分支**
+#### **2. 拉取所有远程分支并在本地创建跟踪分支**
 
 如果你希望将所有远程分支都检出并在本地创建对应的跟踪分支，可以使用以下命令：
 
@@ -194,18 +172,9 @@ for branch in $(git branch -r | grep -v '\->'); do git checkout --track $branch;
 - 使用 `grep -v '\->'` 过滤掉符号链接（如 `HEAD ->`）。
 - 使用 `git checkout --track` 命令为每个远程分支创建本地跟踪分支。
 
-### **3. 检查所有本地分支**
-
-执行完上述操作后，可以使用以下命令查看所有本地和远程分支：
-
-```bash
-git branch -a
-```
-
-所有的远程分支将显示为 `remotes/origin/branch_name`，而本地创建的分支会显示在没有 `remotes/` 前缀的地方。
 
 ---
 
-### **4. 注意事项**
+#### **3. 注意事项**
 - 使用 `git fetch` 会拉取所有远程分支的最新信息，但不会自动切换到这些分支。
 - 使用 `git checkout --track` 创建本地分支并跟踪远程分支。
