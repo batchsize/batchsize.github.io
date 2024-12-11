@@ -4,7 +4,7 @@
         { "title": "Git 操作", "file": "pages/git操作.md" }
     ],
     "Programming": [
-        { "title": "glog", "file": "pages/glog.md" },
+        { "title": "glog", "file": "pages/glog.md" }
     ],
     "Reading": [
         { "title": "读书笔记", "file": "pages/读书笔记.md" }
