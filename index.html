@@ -2,14 +2,39 @@
 <html>
 <head>
     <title>My Blog</title>
-    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
 </head>
 <body>
     <h1>Welcome to My Blog!</h1>
     <p>This is a sample blog hosted on GitHub Pages.</p>
-    <ul>
-        <li><a href="viewer.html?file=pages/docker容器.md">docker容器</a></li>
-        <li><a href="viewer.html?file=pages/git操作.md">git操作</a></li>
-    </ul>
+
+    <div id="categories"></div>
+
+    <script>
+        // 加载文章分类和列表
+        fetch('articles.json')
+            .then(response => response.json())
+            .then(data => {
+                const categoriesDiv = document.getElementById('categories');
+                for (const [category, articles] of Object.entries(data)) {
+                    // 添加分类标题
+                    const categoryTitle = document.createElement('h2');
+                    categoryTitle.textContent = category;
+                    categoriesDiv.appendChild(categoryTitle);
+
+                    // 添加文章列表
+                    const ul = document.createElement('ul');
+                    articles.forEach(article => {
+                        const li = document.createElement('li');
+                        const a = document.createElement('a');
+                        a.href = `viewer.html?file=${article.file}`;
+                        a.textContent = article.title;
+                        li.appendChild(a);
+                        ul.appendChild(li);
+                    });
+                    categoriesDiv.appendChild(ul);
+                }
+            })
+            .catch(error => console.error('Error loading articles:', error));
+    </script>
 </body>
 </html>
