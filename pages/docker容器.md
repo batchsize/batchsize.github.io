@@ -1,7 +1,7 @@
 ### 可视化
 1. **启动**
 ```bash
-docker run -it --privileged --name=dev_gpu -e DISPLAY=localhost:0 -v C:\Users\name\workspace:/root --gpus all nvidia/cuda:12.3.2-cudnn9-devel-ubuntu22.04 /usr/bin/bash
+docker run -it --privileged --name=dev_gpu -e DISPLAY=localhost:0 -v C:\Users\name\workspace:/root --gpus all nvidia/cuda:12.3.2-cudnn9-devel-ubuntu22.04 /bin/bash
 ```
 2. **配置可视化**
    - windows 端安装xming、shell
