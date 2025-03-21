@@ -5,6 +5,7 @@
 ```bash
 # cmake添加预处理器定义(宏定义)、指定编译链
 cmake -DCMAKE_CXX_FLAGS="-DMY_DEFINE -DANOTHER_DEFINE"  -DCMAKE_TOOLCHAIN_FILE=../platforms/x86_64.cmake ..
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local/myproject ..
 ```
 
 ### conda
@@ -30,7 +31,7 @@ docker load -i ubuntu_20.04.tar
 ```
 
 
-### C++
+### 调试
 ```bash
 strings /lib/libc.so.6  | grep GLIBC_
 nm -D libtest_sdk.so | grep _ZN12test6Module7IsInputEv
@@ -43,13 +44,24 @@ strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep GLIBCXX
 getconf GNU_LIBC_VERSION
 # 或
 strings /usr/lib/x86_64-linux-gnu/libc.so.6 | grep GLIBC
+
+free -m
+
+# 查看端口是否占用
+netstat -ano | findstr :8080
 ```
 
 
 ### ffmpeg
 ```bash
+ffmpeg -i input.jpg -pix_fmt nv12 output.nv12
+ffplay -f rawvideo -pix_fmt nv12 -video_size 640x480 output.nv12
+
 ffplay -video_size 1280x720 -pixel_format nv12 -f rawvideo frame_nv12.yuv
 ffmpeg -i ../02.mp4 -frames:v 1 -vf scale=1280:720 -pix_fmt nv12 frame_nv12.yuv
+
+# h264 转mp4
+ffmpeg -i input.h264 -c:v copy output.mp4
 ```
 
 ### gdb
@@ -66,4 +78,54 @@ netstat -ano | findstr :8080
 
 file libx264.so.164 
 # libx264.so.164: ELF 32-bit LSB shared object, ARM, EABI5 version 1 (SYSV), dynamically linked, with debug_info, not stripped
+
+# 将图片名保存到txt中
+find ./yolo_data/quant_data/quant_image_v0.12/images/train/ -name "*.jpg" > dataset.txt
+ls ./yolo_data/quant_data/quant_image_v0.12/images/train/*.jpg > dataset.txt
 ```
+
+
+### adb
+```bash
+# 安装adb
+apt install android-tools-adb android-tools-fastboot
+
+adb devices
+adb shell
+adb push/pull
+```
+
+
+### win md5
+```bash
+certutil -hashfile <文件路径> MD5
+```
+
+### nfs 挂载
+```bash
+# 本机安装nfs服务器
+sudo apt update
+sudo apt install nfs-kernel-server
+# 编辑 /etc/exports，添加
+/home/user/shared *(rw,sync,no_subtree_check)
+
+# *：允许所有 IP 访问。可以替换为特定 IP 或网段（如 192.168.1.0/24）。
+# rw：允许读写。
+# sync：同步写入。
+# no_subtree_check：禁用子树检查，提高性能
+
+# 重启nfs服务
+sudo systemctl restart nfs-kernel-server
+
+# 验证导出
+sudo exportfs -v
+
+# 远程机器挂载
+sudo apt update
+sudo apt install nfs-common
+sudo mkdir -p /mnt/remote_shared
+sudo mount 192.168.1.100:/home/user/shared /mnt/remote_shared
+#验证挂载 
+df -h
+```
+
