@@ -10,6 +10,13 @@ cmake -DCMAKE_INSTALL_PREFIX=/usr/local/myproject ..
 
 ### conda
 ```bash
+curl -O https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-x86_64.sh
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+chmod +x Miniconda3-latest-Linux-x86_64.sh
+./Miniconda3-latest-Linux-x86_64.sh
+
 conda create --name convert_model python=3.12
 conda env list
 conda activate convert_model
@@ -129,3 +136,36 @@ sudo mount 192.168.1.100:/home/user/shared /mnt/remote_shared
 df -h
 ```
 
+# tmux
+```bash
+apt install tmux
+
+tmux -V
+# 启动一个新的 tmux 会话：
+tmux new -s mysession
+# 在 tmux 会话中运行程序：
+./your_program arg1 arg2 arg3
+# 按 Ctrl+B，然后按 D 分离会话（程序会在后台继续运行）。
+
+# 重新连接到会话：
+tmux attach -t mysession
+
+tmux ls # 列出所有会话
+
+exit # 退出会话
+
+# 快捷键
+快捷键	功能
+Ctrl+B + D	分离当前会话
+Ctrl+B + C	创建一个新窗口
+Ctrl+B + N	切换到下一个窗口
+Ctrl+B + P	切换到上一个窗口
+Ctrl+B + W	列出所有窗口
+Ctrl+B + %	垂直分割窗口
+Ctrl+B + "	水平分割窗口
+Ctrl+B + 方向键	在分割的窗口之间切换
+Ctrl+B + [	进入复制模式（按 q 退出）
+Ctrl+B + ]	粘贴复制的内容
+Ctrl+B + &	关闭当前窗口
+
+```
