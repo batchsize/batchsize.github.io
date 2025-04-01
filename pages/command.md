@@ -56,6 +56,10 @@ free -m
 
 # 查看端口是否占用
 netstat -ano | findstr :8080
+
+# 打印thread id
+#include <thread>
+std::thread::id thread_id = std::this_thread::get_id();
 ```
 
 
@@ -69,6 +73,8 @@ ffmpeg -i ../02.mp4 -frames:v 1 -vf scale=1280:720 -pix_fmt nv12 frame_nv12.yuv
 
 # h264 转mp4
 ffmpeg -i input.h264 -c:v copy output.mp4
+
+ffmpeg -i input.mp4  # 查看帧率等信息
 ```
 
 ### gdb
@@ -100,6 +106,12 @@ apt install android-tools-adb android-tools-fastboot
 adb devices
 adb shell
 adb push/pull
+
+# 1. 停止 ADB 服务
+sudo adb kill-server
+# 2. 重新启动 ADB 服务
+sudo adb start-server
+
 ```
 
 
@@ -154,6 +166,9 @@ tmux ls # 列出所有会话
 
 exit # 退出会话
 
+# 删除会话 
+tmux kill-session -t session2
+
 # 快捷键
 快捷键	功能
 Ctrl+B + D	分离当前会话
@@ -167,5 +182,17 @@ Ctrl+B + 方向键	在分割的窗口之间切换
 Ctrl+B + [	进入复制模式（按 q 退出）
 Ctrl+B + ]	粘贴复制的内容
 Ctrl+B + &	关闭当前窗口
+
+```
+
+
+``` bash
+
+chmod -R 777 /path/to/folder
+```
+
+``` bash
+# 文件查找
+sudo find / -name "librga.so" 2>/dev/null
 
 ```
