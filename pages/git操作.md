@@ -188,3 +188,9 @@ git clone --depth=1 <repo-url>  # 仅克隆最新的 commit
 ```bash
 git fetch --unshallow
 ```
+
+### 忽略文件权限变更
+```bash
+git config core.fileMode false
+git config --global core.fileMode false # 全局
+```
