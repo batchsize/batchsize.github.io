@@ -1,13 +1,34 @@
 {
     "Development": [
-        { "title": "Docker 容器", "file": "pages/docker容器.md" },
-        { "title": "Git 操作", "file": "pages/git操作.md" },
-        { "title": "llm提示词", "file": "pages/llm提示词.md" },
-        { "title": "rockchip开发", "file": "pages/rockchip开发.md" },
-        { "title": "交叉编译", "file": "pages/交叉编译.md" },
-        { "title": "command", "file": "pages/command.md" }
+        {
+            "title": "command",
+            "file": "pages/command.md"
+        },
+        {
+            "title": "docker容器",
+            "file": "pages/docker容器.md"
+        },
+        {
+            "title": "git操作",
+            "file": "pages/git操作.md"
+        },
+        {
+            "title": "llm提示词",
+            "file": "pages/llm提示词.md"
+        },
+        {
+            "title": "rockchip开发",
+            "file": "pages/rockchip开发.md"
+        }
     ],
     "Programming": [
-        { "title": "glog", "file": "pages/glog.md" }
+        {
+            "title": "glog",
+            "file": "pages/glog.md"
+        },
+        {
+            "title": "交叉编译",
+            "file": "pages/交叉编译.md"
+        }
     ]
 }
