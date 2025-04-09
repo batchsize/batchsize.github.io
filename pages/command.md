@@ -196,3 +196,9 @@ chmod -R 777 /path/to/folder
 sudo find / -name "librga.so" 2>/dev/null
 
 ```
+
+```bash
+# ssh 免密登录
+ssh-keygen # 生成公钥
+ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.x.x
+```
