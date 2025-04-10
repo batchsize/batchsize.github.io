@@ -202,3 +202,58 @@ sudo find / -name "librga.so" 2>/dev/null
 ssh-keygen # 生成公钥
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.x.x
 ```
+
+
+```bash
+
+import numpy as np
+
+# 加载 .npy 文件
+data = np.load('your_file.npy')
+
+# 查看数组维度
+print("Shape:", data.shape)
+
+# 查看数组占用的内存大小（字节）
+print("Size in memory (bytes):", data.nbytes)
+
+# 转换为人类可读格式（如 MB）
+print("Size in MB:", data.nbytes / (1024 * 1024))
+```
+
+
+### 替换特殊字符
+
+```bash
+# 安装 rename 工具（如果未安装）
+sudo apt install rename
+
+# 进入目标目录
+cd /path/to/your/images/
+
+# 替换所有 & 为 _ （示例）
+rename 's/&/_/g' *
+
+# 替换所有空格为 _ 
+rename 's/ /_/g' *
+
+# 替换所有特殊字符（包括 &, -, 空格等）
+rename 's/[^a-zA-Z0-9._-]/_/g' *
+
+
+
+# 进入目标目录
+cd /path/to/your/images/
+
+# 替换所有 & 为 _
+find . -name "*&*" -exec bash -c 'mv "$0" "${0//&/_}"' {} \;
+
+# 替换所有空格为 _
+find . -name "* *" -exec bash -c 'mv "$0" "${0// /_}"' {} \;
+
+说明：
+find . -name "*&*"：查找所有包含 & 的文件。
+
+"${0//&/_}"：把 $0（文件名）中的 & 替换成 _。
+
+```
