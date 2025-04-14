@@ -201,6 +201,10 @@ sudo find / -name "librga.so" 2>/dev/null
 # ssh 免密登录
 ssh-keygen # 生成公钥
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.x.x
+
+# windows
+ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub | ssh user@123.45.67.89 "cat >> ~/.ssh/authorized_keys"
 ```
 
 
