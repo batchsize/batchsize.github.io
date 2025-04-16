@@ -71,10 +71,28 @@ ffplay -f rawvideo -pix_fmt nv12 -video_size 640x480 output.nv12
 ffplay -video_size 1280x720 -pixel_format nv12 -f rawvideo frame_nv12.yuv
 ffmpeg -i ../02.mp4 -frames:v 1 -vf scale=1280:720 -pix_fmt nv12 frame_nv12.yuv
 
+# 图片转mp4
+ffmpeg -loop 1 -i test.jpg -c:v libx264 -t 5 -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" output.mp4
+
 # h264 转mp4
 ffmpeg -i input.h264 -c:v copy output.mp4
 
 ffmpeg -i input.mp4  # 查看帧率等信息
+
+
+# 批量转mp4
+#!/bin/bash
+
+# 遍历当前目录下所有 .h264 文件
+for file in *.h264; do
+    # 提取文件名（不带扩展名）
+    filename="${file%.*}"
+    
+    # 使用 ffmpeg 转换（H.264 直接封装为 MP4）
+    ffmpeg -i "$file" -c:v copy -f mp4 "${filename}.mp4" -y
+    
+    echo "已转换: $file → ${filename}.mp4"
+done
 ```
 
 ### gdb
@@ -260,4 +278,21 @@ find . -name "*&*"：查找所有包含 & 的文件。
 
 "${0//&/_}"：把 $0（文件名）中的 & 替换成 _。
 
+```
+
+
+### python
+
+```bash
+pip cache dir
+pip cache purge
+pip install onnx -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+
+# 手动修改whl
+pip install wheel
+python -m wheel unpack your_package.whl
+cat your_package/METADATA
+# 打包whl
+python -m wheel pack your_package
 ```
