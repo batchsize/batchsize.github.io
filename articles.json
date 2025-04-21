@@ -19,6 +19,10 @@
         {
             "title": "rockchip开发",
             "file": "pages/rockchip开发.md"
+        },
+        {
+            "title": "数据统计",
+            "file": "pages/数据统计.md"
         }
     ],
     "Programming": [
