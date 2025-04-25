@@ -79,6 +79,9 @@ ffmpeg -i input.h264 -c:v copy output.mp4
 
 ffmpeg -i input.mp4  # 查看帧率等信息
 
+# mp4转图片，从1开始
+ffmpeg -i input.mp4 -start_number 1 data/%d.jpg
+
 
 # 批量转mp4
 #!/bin/bash
@@ -296,3 +299,9 @@ cat your_package/METADATA
 # 打包whl
 python -m wheel pack your_package
 ```
+
+
+zip -r -y out.zip out/
+
+
+find imgsavet -name "*.npy" | sort -t '/' -k2 -n | tee input.txt
