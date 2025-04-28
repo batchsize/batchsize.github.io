@@ -305,3 +305,5 @@ zip -r -y out.zip out/
 
 
 find imgsavet -name "*.npy" | sort -t '/' -k2 -n | tee input.txt
+
+cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-linux-gnueabihf.toolchain.cmake -DCMAKE_BUILD_TYPE=Release ..
