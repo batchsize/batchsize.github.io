@@ -24,6 +24,10 @@
             "title": "数据统计",
             "file": "pages/数据统计.md"
         }
+        {
+            "title": "模型量化",
+            "file": "pages/模型量化.md"
+        }
     ],
     "Programming": [
         {
