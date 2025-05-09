@@ -291,6 +291,8 @@ pip cache dir
 pip cache purge
 pip install onnx -i https://pypi.tuna.tsinghua.edu.cn/simple
 
+# 查看onnx版本
+pip show onnx
 
 # 手动修改whl
 pip install wheel
