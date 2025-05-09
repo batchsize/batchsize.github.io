@@ -194,3 +194,27 @@ git fetch --unshallow
 git config core.fileMode false
 git config --global core.fileMode false # 全局
 ```
+
+### git pull 连接失败问题
+```bash
+1. ssh 22端口被屏蔽，尝试使用443
+# 编辑 ~/.ssh/config，添加以下内容
+Host github.com
+    Hostname ssh.github.com
+    Port 443
+    User git
+
+
+2.测试连接
+ssh -T git@github.com
+
+3. 验证ssh key
+ssh -vT git@github.com  # -v 显示详细日志
+
+4. 使用临时https + 个人访问令牌（PAT）
+git remote set-url origin https://github.com/username/repo.git
+git pull  # 输入用户名和PAT（替代密码）
+
+生成 PAT：GitHub → Settings → Developer settings → Personal Access Tokens。
+
+```

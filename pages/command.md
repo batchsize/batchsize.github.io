@@ -27,6 +27,28 @@ conda env remove --name convert_model
 # 使用yml文件创建
 conda env create -f convert_model.yml
 
+
+# conda 安装到非/root路径
+# 创建目标目录并赋权
+mkdir -p /opt/miniconda3
+chown -R $(whoami):$(whoami) /opt/miniconda3
+
+# 下载并安装 Miniconda
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
+bash /tmp/miniconda.sh -b -p -u /opt/miniconda3
+rm /tmp/miniconda.sh
+
+验证安装
+source /opt/miniconda3/bin/activate
+conda --version
+
+# 初始化 Conda（将启动代码添加到 ~/.bashrc）
+/your/path/to/conda/bin/conda init bash  # 将 Conda 
+
+# 登录时自动激活 base 环境
+conda config --set auto_activate_base true 
+#启动代码写入 ~/.bashrc
+source ~/.bashrc # 重新加载 Shell 配置
 ```
 
 
