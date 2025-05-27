@@ -138,6 +138,9 @@ file libx264.so.164
 # 将图片名保存到txt中
 find ./yolo_data/quant_data/quant_image_v0.12/images/train/ -name "*.jpg" > dataset.txt
 ls ./yolo_data/quant_data/quant_image_v0.12/images/train/*.jpg > dataset.txt
+
+// 按顺序保存
+ls ./videos/*.mp4 | sort -n -t/ -k3 | awk '{print "./" $0}' > video_list.txt
 ```
 
 
@@ -331,3 +334,39 @@ zip -r -y out.zip out/
 find imgsavet -name "*.npy" | sort -t '/' -k2 -n | tee input.txt
 
 cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-linux-gnueabihf.toolchain.cmake -DCMAKE_BUILD_TYPE=Release ..
+
+
+```bash
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+set(CMAKE_BUILD_TYPE Release)
+
+
+
+set(CMAKE_SKIP_RPATH TRUE)
+install(TARGETS test_sdk
+        LIBRARY DESTINATION ${CMAKE_SOURCE_DIR}/release/test_sdk)
+
+install(FILES 
+    include/header1.h
+    include/subdir/header2.h
+    DESTINATION release/scene_sense_sdk/include
+)
+
+
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/
+    DESTINATION release/scene_sense_sdk/include
+    FILES_MATCHING 
+    PATTERN "*.h"
+    PATTERN "unwanted_dir" EXCLUDE  # 排除特定目录
+    PATTERN "experimental/*" EXCLUDE  # 排除实验性头文件
+)
+
+set(PUBLIC_HEADERS
+    include/core/api.h
+    include/utils/helper.h
+)
+
+install(FILES ${PUBLIC_HEADERS}
+    DESTINATION release/scene_sense_sdk/include
+)
+```
