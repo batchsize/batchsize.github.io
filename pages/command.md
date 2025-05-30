@@ -369,4 +369,9 @@ set(PUBLIC_HEADERS
 install(FILES ${PUBLIC_HEADERS}
     DESTINATION release/scene_sense_sdk/include
 )
+
+install(FILES ${CMAKE_SOURCE_DIR}/tests/main.cpp
+    DESTINATION ${CMAKE_SOURCE_DIR}/release/
+    RENAME demo.cpp
+)
 ```
