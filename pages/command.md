@@ -375,3 +375,10 @@ install(FILES ${CMAKE_SOURCE_DIR}/tests/main.cpp
     RENAME demo.cpp
 )
 ```
+
+
+```
+switch 语句的表达式必须是整数类型（包括字符型和枚举类型）或能够隐式转换为整数的类型例, 如 int, short, char 或 enum
+
+```
+
