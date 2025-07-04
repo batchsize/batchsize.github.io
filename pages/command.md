@@ -325,6 +325,10 @@ python -m wheel unpack your_package.whl
 cat your_package/METADATA
 # 打包whl
 python -m wheel pack your_package
+
+
+# 安装依赖清单文件
+pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
 ```
 
 
@@ -382,3 +386,154 @@ switch 语句的表达式必须是整数类型（包括字符型和枚举类型�
 
 ```
 
+tail -f
+
+```
+
+
+
+```
+ssh: connect to host github.com port 22: Connection timed out
+
+解决方案：使用 SSH 的 备用端口 443
+nano ~/.ssh/config
+添加:
+Host github.com
+  HostName ssh.github.com
+  Port 443
+  User git
+  IdentityFile ~/.ssh/id_rsa
+IdentityFile 改成你的私钥路径（一般就是 ~/.ssh/id_rsa）
+
+测试连接:
+ssh -T git@github.com
+
+```
+
+
+```
+tail -f
+
+## 匹配 任意一个 关键字  `egrep "a|b" 或 grep -E "a|b"`
+tail -f /var/log/syslog | egrep "error|fail"
+
+tail -f server.log | grep -E "timeout|disconnect"
+
+## 同时匹配两个关键字	`grep "a" |	grep "b"`
+
+tail -f your.log | grep "error" | grep "disk" （两个关键词都必须满足）
+
+## grep 基础上排除某个关键字
+tail -f your.log | grep -v "heartbeat"
+
+先排除包含 "debug" 的行；
+再在剩下的结果中排除包含 "heartbeat" 的行
+两个 grep -v 是逐步过滤的，逻辑是 “不包含 debug 且不包含 heartbeat”
+tail -f your.log | grep -v "debug" | grep -v "heartbeat" (排除多个关键字)
+
+
+## 排除多个
+这是一个正则表达式形式，"debug|heartbeat" 表示匹配任何一个包含 debug 或 heartbeat 的行，然后用 -v 排除。
+
+也等价于：“不包含 debug 或 heartbeat 的任意一项”
+tail -f your.log | grep -Ev "debug|heartbeat" （一次性排除多个）
+
+## 组合
+tail -f your.log | grep -E "error|warn" | grep -v "debug"
+
+## 包含空格或特殊字符
+
+grep -E "connection timeout|server disconnect|login failed"
+
+
+## 匹配三个关键字
+tail -f server.log | grep -E "timeout|disconnect|failed"
+
+tail -f server.log | grep -Ev "timeout|disconnect|failed"
+
+
+## 避免误匹配
+grep -Evw "debug|heartbeat"
+
+
+-E：Extended regular expressions
+扩展正则表达式语法（ERE），允许使用 |（或）、+、?、() 等更丰富的正则语法，而不必转义
+-v：Invert match
+```
+
+
+
+```
+检测内存泄漏  valgrind 
+
+valgrind --tool=memcheck --leak-check=full ./your_program
+
+valgrind --leak-check=full --show-leak-kinds=all ./your_program
+
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./your_program
+
+✅ --leak-check=full
+
+检查所有内存泄漏，包括微小泄漏
+
+显示泄漏的大小、位置（backtrace）
+
+✅ --show-leak-kinds=all
+
+显示所有类型的泄漏，包括：
+
+definitely lost: 100% 泄漏，找不到指针
+
+indirectly lost: 被泄漏对象间接引用的内存
+
+possibly lost: 有可能泄漏，无法确定是否还可达
+
+still reachable: 程序结束仍可访问，但未释放（不一定是 bug）
+
+👉 用这个可以识别哪些泄漏是 真正的问题。
+
+✅ --track-origins=yes
+
+启用来源追踪：当有未初始化内存读写、野指针使用时，会显示它在哪里分配的
+
+非常有用来找：
+
+use of uninitialized value
+
+invalid read/write
+
+错误 malloc/free 使用等
+
+⚠️ 缺点：会显著变慢，比不开启时慢 2-5 倍。
+
+
+| 场景             | 推荐命令                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------- |
+| 只是看看有没有泄漏      | `valgrind --leak-check=full ./your_program`                                           |
+| 想知道详细泄漏类型      | `valgrind --leak-check=full --show-leak-kinds=all ./your_program`                     |
+| 出现非法访问/莫名其妙的崩溃 | `valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./your_program` |
+
+
+```
+
+
+火焰图
+初始化
+
+
+
+
+```
+快速安装opencv
+
+
+1. 直接安装预编译的 OpenCV（无需编译，最快！）
+pip install --prefer-binary opencv-python-headless -i https://mirrors.aliyun.com/pypi/simple
+
+2. 使用 apt 安装（Ubuntu/Debian 系统最快）
+sudo apt update
+sudo apt install python3-opencv  # 系统自带的 OpenCV（可能版本较旧）
+
+3. 使用 Conda 安装（适合 Anaconda 环境）
+conda install -c conda-forge opencv  # 自动解决依赖，速度较快
+```
