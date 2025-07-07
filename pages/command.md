@@ -537,3 +537,9 @@ sudo apt install python3-opencv  # 系统自带的 OpenCV（可能版本较旧�
 3. 使用 Conda 安装（适合 Anaconda 环境）
 conda install -c conda-forge opencv  # 自动解决依赖，速度较快
 ```
+
+
+
+```
+Segmentation fault (core dumped)
+```
