@@ -542,4 +542,6 @@ conda install -c conda-forge opencv  # 自动解决依赖，速度较快
 
 ```
 Segmentation fault (core dumped)
+1. int 函数忘写返回值
+2. 程序试图访问未分配或受保护的内存区域
 ```
