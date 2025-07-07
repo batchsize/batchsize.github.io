@@ -31,6 +31,10 @@
         {
             "title": "C++",
             "file": "pages/C++.md"
+        },
+        {
+            "title": "C++",
+            "file": "pages/面向对象.md"
         }
     ],
     "Programming": [
