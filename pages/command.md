@@ -545,3 +545,25 @@ Segmentation fault (core dumped)
 1. int 函数忘写返回值
 2. 程序试图访问未分配或受保护的内存区域
 ```
+
+
+
+```
+# cp 命令
+
+# 保留软链接
+cp -P source_file_or_dir destination/ (或 --preserve=links)
+
+# -a 或 --archive（相当于 -dR --preserve=all，保留软链接、权限、时间戳等所有属性）
+cp -a source_file_or_dir destination/
+
+# -d 选项（等同于 --no-dereference --preserve=links，确保软链接不会被解引用（dereference），而是直接拷贝链接本身）
+cp -d source_file_or_dir destination/
+
+# 注意
+如果目标位置已经存在同名文件，cp 会覆盖它（除非使用 -i 交互模式）。
+如果软链接指向的路径在目标位置不存在，拷贝后的软链接可能会失效（变成“悬空链接”）。
+如果希望递归拷贝整个目录并保留软链接，可以使用 -r 或 -R 结合 -P 或 -a：
+
+cp -aR source_dir/ destination/
+```
