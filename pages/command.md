@@ -567,3 +567,18 @@ cp -d source_file_or_dir destination/
 
 cp -aR source_dir/ destination/
 ```
+
+
+```
+
+netstat -ano | findstr ":23"
+```
+
+
+#include <thread>
+
+void my_function() {
+    // 获取当前线程ID
+    std::thread::id thread_id = std::this_thread::get_id();
+    std::cout << "Current thread ID: " << thread_id << std::endl;
+}

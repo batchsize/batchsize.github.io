@@ -35,6 +35,10 @@
         {
             "title": "C++",
             "file": "pages/面向对象.md"
+        },
+        {
+            "title": "rknpu开发",
+            "file": "pages/rknpu开发.md"
         }
     ],
     "Programming": [
