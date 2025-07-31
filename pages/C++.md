@@ -2471,3 +2471,25 @@ int sum_array_simd(const int* arr, int n) {
 * 或写个简单示例演示如何用汇编指令做循环展开。
 
 你想先选哪个？
+
+
+
+
+```
+类型转换
+你可以直接将 uint8_t* nv12_img 转换为 char* 或 unsigned char*，因为它们本质上都是字节类型指针，只是 signed/unsigned 不同。
+
+如果你想让 src_buf 是 char* 类型，推荐这样写：
+
+如果你想让 src_buf 是 unsigned char* 类型：
+
+注意：
+
+reinterpret_cast<char*>(nv12_img) 和 (char*)nv12_img 都可以实现类型转换。
+如果后续 API 需要 char* 类型，建议用 reinterpret_cast<char*>。
+如果只是做内存操作，unsigned char* 和 uint8_t* 通常可以直接赋值，无需转换。
+总结：
+src_buf = reinterpret_cast<char*>(nv12_img);
+即可完成类型转换。
+
+```

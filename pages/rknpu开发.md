@@ -25,3 +25,8 @@ export VIV_VX_DEBUG_LEVEL=5
 restart_rknn.sh
 
 ```
+
+
+变量起名
+
+注释生成
