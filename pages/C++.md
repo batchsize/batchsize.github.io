@@ -2493,3 +2493,13 @@ src_buf = reinterpret_cast<char*>(nv12_img);
 即可完成类型转换。
 
 ```
+
+
+
+# bazel 添加-g 编译
+
+```
+ bazel build //:dev_demo --compilation_mode=dbg --strip=never --copt="-g3" --copt="-fno-omit-frame-pointer" --config=dev-npu -s 
+注释strip
+生成在 bazel-out/*-dbg里
+``` 
