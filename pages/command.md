@@ -87,7 +87,9 @@ std::thread::id thread_id = std::this_thread::get_id();
 
 ### ffmpeg
 ```bash
-ffmpeg -i input.jpg -pix_fmt nv12 output.nv12
+ffmpeg -i input.jpg -pix_fmt nv12 -s 1280x720 output.yuv
+ffplay -f rawvideo -pix_fmt nv12 -s 1280x720 output.yuv
+
 ffplay -f rawvideo -pix_fmt nv12 -video_size 640x480 output.nv12
 
 ffplay -video_size 1280x720 -pixel_format nv12 -f rawvideo frame_nv12.yuv
