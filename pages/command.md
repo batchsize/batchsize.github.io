@@ -516,6 +516,12 @@ invalid read/write
 | 出现非法访问/莫名其妙的崩溃 | `valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./your_program` |
 
 
+使用 --trace-children=yes 和日志文件
+valgrind --tool=memcheck --leak-check=full --trace-children=yes --log-file=valgrind.log ./your_program
+--trace-children=yes：跟踪子进程。
+--log-file：把结果写到文件，避免终端输出被淹没。
+
+
 ```
 
 
@@ -584,3 +590,19 @@ void my_function() {
     std::thread::id thread_id = std::this_thread::get_id();
     std::cout << "Current thread ID: " << thread_id << std::endl;
 }
+
+
+# win 使用vscode 远程可视ubuntu服务器
+
+```
+vscode  配置文件:
+ForwardX11 yes
+ForwardX11Trusted yes
+
+export DISPLAY=172.21.105.158:0
+export DISPLAY=localhost:10
+
+windows 下载VcXsrv
+
+Disable access control勾选，其它按默认即可
+```
