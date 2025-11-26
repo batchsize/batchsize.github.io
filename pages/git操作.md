@@ -218,3 +218,27 @@ git pull  # 输入用户名和PAT（替代密码）
 生成 PAT：GitHub → Settings → Developer settings → Personal Access Tokens。
 
 ```
+
+
+git clone https://github.com/NVIDIA/cuda-samples.git
+cd cuda-samples
+
+git tag        # 查看 tag 列表，v12.3 应该在这里
+git branch -a  # 查看远程分支
+
+git checkout -b my-v12.3 v12.3
+
+
+
+git checkout v12.3
+
+
+* (HEAD detached at v12.3)   // 当前 HEAD 指向 tag v12.3
+  master
+
+
+detached HEAD 的特点:
+
+1. 可以查看、运行、修改代码  //detached HEAD 指向 tag 或 commit，正常分支HEAD 指向最新 commit
+2. 提交不会属于任何分支（除非你新建一个分支）
+3. 切换到其他分支或 commit 时，如果没保存修改，提交可能丢失
