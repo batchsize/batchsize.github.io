@@ -160,6 +160,9 @@ sudo adb kill-server
 # 2. 重新启动 ADB 服务
 sudo adb start-server
 
+有多个adb设备，设置别名
+alias adbb='adb -s 0000000000000000'
+
 ```
 
 
