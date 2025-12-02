@@ -62,3 +62,25 @@ cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
 echo 1000000 | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed
 
 ```
+
+
+rv1126b
+```
+连板转换模型、测试需要打开rknn srver
+adb shell
+chmod +x /usr/bin/rknn_server
+nohup /usr/bin/rknn_server >/dev/null&
+restart_rknn.sh
+
+
+cat /sys/kernel/debug/rknpu/freq
+cat /sys/kernel/debug/rknpu/load
+
+自定义频率:
+echo userspace >  /sys/class/devfreq/22000000.npu/governor
+echo 600000000 >  /sys/class/devfreq/22000000.npu/userspace/set_freq
+
+cat /sys/class/devfreq/22000000.npu/available_frequencies
+cat /sys/class/devfreq/22000000.npu/available_governors
+
+```
