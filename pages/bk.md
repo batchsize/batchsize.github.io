@@ -218,3 +218,74 @@ quantized_dtype = "asymmetric_quantized-u8"
 * 精确给你修改方法（如何避免 RKNN 把 GAP 转成 conv）
 
 要不要我帮你分析你的 graph？
+
+
+
+
+明白了，你的需求是：**当前容器工作已经有改动，但忘记挂载路径（volume），想把当前容器状态保存成镜像，然后重新创建容器**。我给你整理一个完整流程。
+
+---
+
+### 1️⃣ 保存当前容器为镜像
+
+假设你的当前容器 ID 或名字是 `my_container`：
+
+```bash
+docker commit my_container my_saved_image:latest
+```
+
+* `my_saved_image` 是你给新镜像起的名字，可以自定义。
+* `:latest` 是 tag，可以省略。
+
+这一步会把 **当前容器的文件系统状态** 保存到新镜像里（包括你改动过的文件），不影响原容器。
+
+---
+
+### 2️⃣ 查看保存的镜像
+
+```bash
+docker images
+```
+
+你应该能看到：
+
+```
+REPOSITORY           TAG       IMAGE ID       CREATED
+my_saved_image       latest    abcdef123456   ...
+```
+
+---
+
+### 3️⃣ 基于这个镜像创建新容器
+
+假设你想挂载宿主机路径 `/host/path` 到容器路径 `/container/path`：
+
+```bash
+docker run -it \
+    -v /host/path:/container/path \
+    --name my_new_container \
+    my_saved_image:latest \
+    /bin/bash
+```
+
+* `-v` 用来挂载目录。
+* `--name` 给新容器命名。
+* `/bin/bash` 可以改成你需要执行的命令。
+
+这样你就可以在新容器里继续工作，同时挂载了正确路径。
+
+---
+
+### ⚡ 注意
+
+1. **commit 只保存容器文件系统**，不保存挂载的 volume 内容。
+
+   * 如果你在原容器里修改了挂载的宿主路径文件，commit 并不会保存这些改动。
+2. **容器状态（运行进程、网络连接）不会保存**，只是文件系统。
+3. 建议使用 `docker ps -a` 先确认容器 ID，避免 commit 错误。
+
+---
+
+如果你愿意，我可以给你写一个 **一条命令就完成 commit + 重新创建容器 + 挂载 volume 的完整流程**，非常适合你现在的情况。
+
+你希望我写吗？
