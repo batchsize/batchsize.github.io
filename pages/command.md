@@ -609,3 +609,18 @@ windows 下载VcXsrv
 
 Disable access control勾选，其它按默认即可
 ```
+
+
+```
+1. 表达"做什么",不是"怎么做"
+❌ CameraCoverCNN
+❌ OcclusionAlgorithm
+✅ CameraOcclusionDetector
+2. 用名词或名词短语
+❌ DetectCameraOcclusion
+✅ CameraOcclusionDetector
+3. SDK 场景下，避免过于具体的实现细节
+你是 SDK，不是 Demo：
+❌ CameraLensBlockJudgeV2
+✅ CameraObstructionAnalyzer
+```
