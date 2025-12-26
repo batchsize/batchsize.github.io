@@ -632,4 +632,11 @@ CameraOcclusionSdkService
 内部：
 CameraOcclusionDetector
 CameraOcclusionAnalyzer
+
+camera-occlusion-sdk
+ ├── CameraOcclusionSdk
+ ├── CameraOcclusionDetector
+ ├── CameraOcclusionConfig
+ ├── CameraOcclusionResult
+ ├── CameraOcclusionException
 ```
