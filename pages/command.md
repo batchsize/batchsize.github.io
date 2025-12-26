@@ -623,4 +623,13 @@ Disable access control勾选，其它按默认即可
 你是 SDK，不是 Demo：
 ❌ CameraLensBlockJudgeV2
 ✅ CameraObstructionAnalyzer
+
+✅ 方案 2：Sdk + Manager / Service
+
+平台:
+CameraOcclusionSdkManager
+CameraOcclusionSdkService
+内部：
+CameraOcclusionDetector
+CameraOcclusionAnalyzer
 ```
