@@ -84,3 +84,7 @@ cat /sys/class/devfreq/22000000.npu/available_frequencies
 cat /sys/class/devfreq/22000000.npu/available_governors
 
 ```
+
+编译sdk 
+./build.sh lunch
+ source buildroot/envsetup.sh
