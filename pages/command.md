@@ -107,6 +107,9 @@ ffmpeg -i input.mp4  # 查看帧率等信息
 ffmpeg -i input.mp4 -start_number 1 data/%d.jpg
 
 
+ffmpeg -ss 00:02:30 -i input.mp4 -c copy output.mp4
+
+
 # 批量转mp4
 #!/bin/bash
 
