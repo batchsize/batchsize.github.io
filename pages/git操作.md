@@ -242,3 +242,25 @@ detached HEAD 的特点:
 1. 可以查看、运行、修改代码  //detached HEAD 指向 tag 或 commit，正常分支HEAD 指向最新 commit
 2. 提交不会属于任何分支（除非你新建一个分支）
 3. 切换到其他分支或 commit 时，如果没保存修改，提交可能丢失
+
+
+
+ git pull
+remote: Enumerating objects: 1025, done.
+remote: Counting objects: 100% (1025/1025), done.
+remote: Compressing objects: 100% (635/635), done.
+remote: Total 1025 (delta 421), reused 928 (delta 341), pack-reused 0
+Receiving objects: 100% (1025/1025), 47.73 MiB | 32.98 MiB/s, done.
+Resolving deltas: 100% (421/421), done.
+From git.github.com:testrepo/sdk
+ * [new branch]      dev        -> origin/dev
+ * [new branch]      master     -> origin/master
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+
+    git pull <remote> <branch>
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=origin/<branch> dev_s1

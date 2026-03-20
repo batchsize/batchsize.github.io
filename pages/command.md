@@ -90,6 +90,8 @@ std::thread::id thread_id = std::this_thread::get_id();
 ffmpeg -i input.jpg -pix_fmt nv12 -s 1280x720 output.yuv
 ffplay -f rawvideo -pix_fmt nv12 -s 1280x720 output.yuv
 
+ffmpeg -f rawvideo -pix_fmt nv12 -s 1280x720 -i output.yuv line_out.jpg
+
 ffplay -f rawvideo -pix_fmt nv12 -video_size 640x480 output.nv12
 
 ffplay -video_size 1280x720 -pixel_format nv12 -f rawvideo frame_nv12.yuv
@@ -108,6 +110,12 @@ ffmpeg -i input.mp4 -start_number 1 data/%d.jpg
 
 
 ffmpeg -ss 00:02:30 -i input.mp4 -c copy output.mp4
+
+ffmpeg -ss 00:02:30 -i input.mp4 -t 10 -c copy output.mp4
+
+ffmpeg -ss 00:02:30 -to 00:02:40 -i input.mp4 -c copy output.mp4
+
+ffmpeg -ss 00:02:30 -i input.mp4 -t 10 -c:v libx264 -c:a aac output.mp4
 
 
 # 批量转mp4
