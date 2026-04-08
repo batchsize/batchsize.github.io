@@ -264,3 +264,239 @@ See git-pull(1) for details.
 If you wish to set tracking information for this branch you can do so with:
 
     git branch --set-upstream-to=origin/<branch> dev_s1
+
+
+
+
+你这个需求其实分三步：
+
+> ✅ 基于远端分支拉代码
+> ✅ 本地改名（新分支）
+> ✅ 取消和远端的 tracking（解绑 upstream）
+
+我给你一套**干净且标准的操作流程**👇
+
+---
+
+## 🧩 一、先基于远端分支创建本地分支
+
+如果你还没切过去：
+
+```bash
+git checkout -b dev_s1 origin/<branch>
+```
+
+👉 这一步会自动建立 tracking（关联远端）
+
+---
+
+## 🧩 二、重命名本地分支
+
+```bash
+git branch -m dev_s1 dev_s1_new
+```
+
+👉 现在你在：
+
+```bash
+dev_s1_new
+```
+
+---
+
+## 🧩 三、取消远端关联（重点）
+
+你现在这个分支默认还是 tracking `origin/<branch>`
+需要解绑：
+
+```bash
+git branch --unset-upstream
+```
+
+---
+
+## 🧩 四、确认已经解绑
+
+```bash
+git branch -vv
+```
+
+如果你看到：
+
+```bash
+* dev_s1_new  abc1234 commit message
+```
+
+👉 没有 `[origin/xxx]` 就说明成功了 ✅
+
+---
+
+## 🧠 关于你这句命令
+
+你写的：
+
+```bash
+git branch --set-upstream-to=origin/<branch> dev_s1
+```
+
+👉 这是**绑定远端**，不是解绑
+
+* `--set-upstream-to` 👉 建立关联
+* `--unset-upstream` 👉 取消关联（你要的）
+
+---
+
+## 🎯 最终你要的状态
+
+你会得到一个：
+
+* ✅ 本地新分支：`dev_s1_new`
+* ✅ 不跟踪任何远端
+* ✅ 可以自由改代码（不会误 push）
+
+---
+
+## 🚀 如果你后面想重新绑定（可选）
+
+```bash
+git push -u origin dev_s1_new
+```
+
+👉 才会重新建立 tracking
+
+---
+
+## 💡 小建议（避免踩坑）
+
+很多人会犯这个错误：
+
+> ❌ 改了分支名，但还连着旧远端 → push 到错误分支
+
+👉 所以你做解绑这一步是**非常正确的**
+
+---
+
+如果你后面还想做：
+
+* 从这个分支再切 feature 分支
+* 或只 push 到新远端
+
+我可以帮你把 workflow 优化成团队标准版 👍
+
+
+
+
+你这个需求其实分三步：
+
+> ✅ 基于远端分支拉代码
+> ✅ 本地改名（新分支）
+> ✅ 取消和远端的 tracking（解绑 upstream）
+
+我给你一套**干净且标准的操作流程**👇
+
+---
+
+## 🧩 一、先基于远端分支创建本地分支
+
+如果你还没切过去：
+
+```bash
+git checkout -b dev_s1 origin/<branch>
+```
+
+👉 这一步会自动建立 tracking（关联远端）
+
+---
+
+## 🧩 二、重命名本地分支
+
+```bash
+git branch -m dev_s1 dev_s1_new
+```
+
+👉 现在你在：
+
+```bash
+dev_s1_new
+```
+
+---
+
+## 🧩 三、取消远端关联（重点）
+
+你现在这个分支默认还是 tracking `origin/<branch>`
+需要解绑：
+
+```bash
+git branch --unset-upstream
+```
+
+---
+
+## 🧩 四、确认已经解绑
+
+```bash
+git branch -vv
+```
+
+如果你看到：
+
+```bash
+* dev_s1_new  abc1234 commit message
+```
+
+👉 没有 `[origin/xxx]` 就说明成功了 ✅
+
+---
+
+## 🧠 关于你这句命令
+
+你写的：
+
+```bash
+git branch --set-upstream-to=origin/<branch> dev_s1
+```
+
+👉 这是**绑定远端**，不是解绑
+
+* `--set-upstream-to` 👉 建立关联
+* `--unset-upstream` 👉 取消关联（你要的）
+
+---
+
+## 🎯 最终你要的状态
+
+你会得到一个：
+
+* ✅ 本地新分支：`dev_s1_new`
+* ✅ 不跟踪任何远端
+* ✅ 可以自由改代码（不会误 push）
+
+---
+
+## 🚀 如果你后面想重新绑定（可选）
+
+```bash
+git push -u origin dev_s1_new
+```
+
+👉 才会重新建立 tracking
+
+---
+
+## 💡 小建议（避免踩坑）
+
+很多人会犯这个错误：
+
+> ❌ 改了分支名，但还连着旧远端 → push 到错误分支
+
+👉 所以你做解绑这一步是**非常正确的**
+
+---
+
+如果你后面还想做：
+
+* 从这个分支再切 feature 分支
+* 或只 push 到新远端
+
+我可以帮你把 workflow 优化成团队标准版 👍
